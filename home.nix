@@ -4,10 +4,10 @@
   home.username = "sakura";
   home.homeDirectory = "/home/sakura";
   programs.home-manager.enable = true;
-#  xdg.enable = true;
   home.stateVersion = "22.11";
   xdg.configFile = {
     "kitty/kitty.conf".source = ./config/kitty/kitty.conf;
+    "tmux/tmux.conf".source= ./config/tmux/tmux.conf;
   };
   programs = {
     git = {
