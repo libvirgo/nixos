@@ -27,6 +27,14 @@
 	    {
 	        home-manager.useGlobalPkgs = true;
 	        home-manager.useUserPackages = true;
+	        environment = {
+              sessionVariables = {
+                XDG_CACHE_HOME  = "$HOME/.cache";
+                XDG_CONFIG_HOME = "$HOME/.config";
+                XDG_DATA_HOME   = "$HOME/.local/share";
+                XDG_BIN_HOME    = "$HOME/.local/bin";
+              };
+	        };
 	        home-manager.users.sakura = import ./home.nix;
 	    }
       ];
