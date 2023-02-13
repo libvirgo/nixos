@@ -74,6 +74,7 @@
       enabled=true
       [org.gnome.desktop.interface]
       text-scaling-factor=1.25
+      cursor-blink=false
       cursor-size=32
       [org.gnome.desktop.wm.preferences]
       button-layout='appmenu:minimize,close'
@@ -99,6 +100,15 @@
       sunset='notify-send "Hello moonshine!"'
     '';
   };
+  services.xserver.desktopManager.xterm.enable = false;
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-tour
+    gnome-console
+    gnome-connections
+  ]) ++ (with pkgs.gnome; [
+    cheese
+    epiphany
+  ]);
   
 
   # Configure keymap in X11

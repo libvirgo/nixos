@@ -7,10 +7,13 @@
   home.stateVersion = "22.11";
   programs = {
     git = {
+      enable = true;
       userEmail = "sakurapetgirl@live.com";
       userName = "libvirgo";
       extraConfig = {
-        credential.helper = "store";
+        credential = {
+          helper = "store";
+        };
       };
     };
     bat.enable = true;
@@ -49,7 +52,7 @@
       plugins = [
         {
           name = "powerlevel10k-config";
-          src = ./shell;
+          src = ./config/zsh;
           file = "p10k-config.zsh";
         }
         {
