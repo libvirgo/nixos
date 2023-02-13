@@ -5,6 +5,15 @@
   home.homeDirectory = "/home/sakura";
   programs.home-manager.enable = true;
   home.stateVersion = "22.11";
+  home.sessionVariables = {
+    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_DATA_HOME   = "$HOME/.local/share";
+    XDG_BIN_HOME    = "$HOME/.local/bin";
+  };
+  xdg.configFile = {
+    "kitty/kitty.conf".source = ./config/kitty/kitty.conf;
+  };
   programs = {
     git = {
       enable = true;
