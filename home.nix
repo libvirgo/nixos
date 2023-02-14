@@ -9,6 +9,9 @@
     "kitty/kitty.conf".source = ./config/kitty/kitty.conf;
     "tmux/tmux.conf".source= ./config/tmux/tmux.conf;
   };
+  home.file = {
+    ".face".source = ./config/face.png;
+  };
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {
       icon-margin-horizontal = 2;
