@@ -9,6 +9,22 @@
     "kitty/kitty.conf".source = ./config/kitty/kitty.conf;
     "tmux/tmux.conf".source= ./config/tmux/tmux.conf;
   };
+  dconf.settings = {
+    "org/gnome/shell/extensions/trayIconsReloaded" = {
+      icon-margin-horizontal = 2;
+      icon-padding-horizontal = 2;
+      icon-size = 20;
+      icons-limit = 5;
+      position-weight = 999;
+      tray-margin-left = 2;
+      tray-position = "center";
+    };
+    "org/gnome/shell/extensions/nightthemeswitcher/commands" = {
+      enabled = true;
+      sunrise = "notify-send 'Hello sunshine!'";
+      sunset = "notify-send 'Hello moonshine!'";
+    };
+  };
   programs = {
     git = {
       enable = true;

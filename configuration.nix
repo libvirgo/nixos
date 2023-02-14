@@ -84,22 +84,9 @@
       # Extensions settings
       [org.gnome.shell]
       enabled-extensions=['clipboard-indicator@tudmotu.com', 'trayIconsReloaded@selfmade.pl', 'nightthemeswitcher@romainvigier.fr']
-      # tray-icons-reloaded
-      [org.gnome.shell.extensions.trayIconsReloaded]
-      icon-margin-horizontal=2
-      icon-padding-horizontal=2
-      icon-size=20
-      icons-limit=5
-      position-weight=999
-      tray-margin-left=2
-      tray-position='center'
-      # night-theme-switcher
-      [org.gnome.shell.extensions.nightthemeswitcher.commands]
-      enabled=true
-      sunrise='notify-send "Hello sunshine!"'
-      sunset='notify-send "Hello moonshine!"'
     '';
   };
+  services.xserver.excludePackages = [ pkgs.xterm ];
   services.xserver.desktopManager.xterm.enable = false;
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
@@ -155,6 +142,7 @@
     tmux
     microsoft-edge
     python3
+    libnotify
   ] ++ (with gnomeExtensions; [
     clipboard-indicator
     tray-icons-reloaded
