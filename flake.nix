@@ -3,12 +3,13 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # emacs-overlay.url = "github:nix-community/emacs-overlays";
-
+#    emacs-overlay.url = "github:nix-community/emacs-overlays";
     nixos-cn = {
       url = "github:nixos-cn/flakes";
       # 强制 nixos-cn 和该 flake 使用相同版本的 nixpkgs
@@ -16,12 +17,24 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs:
+  let
+    system = "x86_64-linux";
+  in
+  {
     # overlays = [ ./overlays/emacs-overlay.nix ] ++ ./overlays;
     nixosConfigurations."ragdoll" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = "${system}";
       # overlays = map (f: f.overlay) [ emacs-overlay ];
-      modules = [
+      modules = let defaults = { pkgs, ...}: {
+        _module.args.nixpkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit (pkgs.stdenv.targetPlatform) system;
+          config.allowUnfree = true;
+        };
+      };
+      in
+      [
+        defaults
         ./configuration.nix
 	    home-manager.nixosModules.home-manager
 	    {
