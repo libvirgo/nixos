@@ -20,10 +20,11 @@
   outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs:
   let
     system = "x86_64-linux";
+    HOST = "ragdoll";
   in
   {
     # overlays = [ ./overlays/emacs-overlay.nix ] ++ ./overlays;
-    nixosConfigurations."ragdoll" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."${HOST}" = nixpkgs.lib.nixosSystem {
       system = "${system}";
       # overlays = map (f: f.overlay) [ emacs-overlay ];
       modules = let defaults = { pkgs, ...}: {
@@ -35,7 +36,7 @@
       in
       [
         defaults
-        ./configuration.nix
+        (./. + "/hosts/${HOST}/configuration.nix")
 	    home-manager.nixosModules.home-manager
 	    {
 	        home-manager.useGlobalPkgs = true;

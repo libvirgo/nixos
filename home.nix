@@ -70,7 +70,7 @@
         pack = "tar -zcvf archive.tar.gz";
         glog = "git log --oneline --decorate --graph";
         gst = "git status";
-        oss = "sudo nixos-rebuild switch --impure --flake $HOME/Documents/code/flake/nixos#$HOST && source ~/.zshrc";
+        oss = "nixos-rebuild switch --flake .#ragdoll --impure --use-remote-sudo && source ~/.zshrc";
       };
       plugins = [
         {
