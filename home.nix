@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs, ... }:
+let pkgs-unstable = import inputs.nixpkgs-unstable {
+  system = pkgs.system;
+  config.allowUnfree = true;
+};
+in
 {
   home.username = "sakura";
   home.homeDirectory = "/home/sakura";
@@ -12,6 +16,11 @@
   home.file = {
     ".face".source = ./config/face.png;
   };
+  home.packages = with pkgs-unstable; [
+      jetbrains.goland
+      jetbrains.datagrip
+      jetbrains.clion
+  ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {
       icon-margin-horizontal = 2;

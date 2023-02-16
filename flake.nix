@@ -8,11 +8,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-#    emacs-overlay.url = "github:nix-community/emacs-overlays";
     nixos-cn = {
       url = "github:nixos-cn/flakes";
-      # 强制 nixos-cn 和该 flake 使用相同版本的 nixpkgs
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -23,19 +20,10 @@
     HOST = "ragdoll";
   in
   {
-    # overlays = [ ./overlays/emacs-overlay.nix ] ++ ./overlays;
     nixosConfigurations."${HOST}" = nixpkgs.lib.nixosSystem {
       system = "${system}";
-      # overlays = map (f: f.overlay) [ emacs-overlay ];
-      modules = let defaults = { pkgs, ...}: {
-        _module.args.nixpkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit (pkgs.stdenv.targetPlatform) system;
-          config.allowUnfree = true;
-        };
-      };
-      in
+      modules =
       [
-        defaults
         (./. + "/hosts/${HOST}/configuration.nix")
 	    home-manager.nixosModules.home-manager
 	    {
@@ -49,6 +37,7 @@
                 XDG_BIN_HOME    = "$HOME/.local/bin";
               };
 	        };
+	        home-manager.extraSpecialArgs = { inherit inputs; };
 	        home-manager.users.sakura = import ./home.nix;
 	    }
       ];

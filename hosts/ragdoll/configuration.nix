@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, nixpkgs-unstable, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -131,10 +131,7 @@
     description = "sakura";
     extraGroups = [ "networkmanager" "wheel" "kvm" "docker" "vboxusers" ];
     packages = with pkgs; [
-    ] ++ (with nixpkgs-unstable; [
-      jetbrains.goland
-      jetbrains.datagrip
-    ]);
+    ];
   };
   environment.systemPackages = with pkgs; [
     git
