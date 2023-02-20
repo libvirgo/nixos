@@ -20,6 +20,9 @@ in
       jetbrains.goland
       jetbrains.datagrip
       jetbrains.clion
+      obsidian
+      fd
+      ripgrep
   ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {

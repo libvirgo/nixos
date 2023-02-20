@@ -18,13 +18,14 @@
   let
     system = "x86_64-linux";
     HOST = "ragdoll";
+    USER = "sakura";
   in
   {
     nixosConfigurations."${HOST}" = nixpkgs.lib.nixosSystem {
       system = "${system}";
       modules =
       [
-        (./. + "/hosts/${HOST}/configuration.nix")
+        ./hosts/${HOST}/configuration.nix
 	    home-manager.nixosModules.home-manager
 	    {
 	        home-manager.useGlobalPkgs = true;
@@ -38,7 +39,7 @@
               };
 	        };
 	        home-manager.extraSpecialArgs = { inherit inputs; };
-	        home-manager.users.sakura = import ./home.nix;
+	        home-manager.users.sakura = import ./users/${USER}/home.nix;
 	    }
       ];
     };
