@@ -182,6 +182,7 @@
     docker = {
       enable = true;
       storageDriver = "btrfs";
+      logDriver = "json-file";
     };
     virtualbox.host = {
       enable = true;

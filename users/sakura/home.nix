@@ -1,8 +1,15 @@
-{ config, pkgs, inputs, ... }:
-let pkgs-unstable = import inputs.nixpkgs-unstable {
-  system = pkgs.system;
-  config.allowUnfree = true;
-};
+{ config, inputs, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+  pkgs = import inputs.nixpkgs {
+    overlays = [
+      (import (builtins.fetchTarball { url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz; }))
+      (import ../../overlays/emacs.nix)
+    ];
+  };
 in
 {
   home.username = "sakura";
@@ -23,6 +30,8 @@ in
       obsidian
       fd
       ripgrep
+      watchexec
+      pkgs.myemacs
   ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {
