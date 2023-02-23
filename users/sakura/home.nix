@@ -24,14 +24,14 @@ in
     ".face".source = ./config/face.png;
   };
   home.packages = with pkgs-unstable; [
-      jetbrains.goland
-      jetbrains.datagrip
-      jetbrains.clion
+      jetbrains.idea-ultimate
       obsidian
       fd
       ripgrep
       watchexec
       pkgs.myemacs
+      minikube
+      kubectl
   ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {

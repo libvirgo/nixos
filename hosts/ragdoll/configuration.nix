@@ -44,7 +44,12 @@
 
   # Configure network proxy if necessary
   networking.proxy.default = "http://127.0.0.1:7890";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24";
+  networking.extraHosts = ''
+    127.0.0.1 etcd
+    127.0.0.1 redis
+    127.0.0.1 jaeger
+  '';
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.inputMethod = {
     enabled = "ibus";
