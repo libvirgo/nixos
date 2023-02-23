@@ -32,6 +32,7 @@ in
       pkgs.myemacs
       minikube
       kubectl
+      gradle
   ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {
