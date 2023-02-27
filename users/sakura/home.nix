@@ -59,6 +59,7 @@ in
         credential = {
           helper = "store";
         };
+	url."https://".insteadOf = "git://";
       };
     };
     bat.enable = true;
