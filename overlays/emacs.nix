@@ -6,8 +6,8 @@ with super.pkgs;
     nativeComp = false;
     withGTK3 = true;
   }).overrideAttrs (old: {
-    name = "emacs-29";
-    version = "29.0.60";
+    name = "emacs-30";
+    version = "30.0.50";
     src = fetchFromGitHub {
       owner = "libvirgo";
       repo = "emacs-src";
