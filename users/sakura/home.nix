@@ -1,14 +1,14 @@
-{ config, inputs, ... }:
+{ config, inputs, lib, ... }:
 let
-  pkgs-unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.system;
-    config.allowUnfree = true;
-  };
   pkgs = import inputs.nixpkgs {
     overlays = [
       (import (builtins.fetchTarball { url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz; }))
       (import ../../overlays/emacs.nix)
     ];
+  };
+  pkgs-unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
   };
 in
 {

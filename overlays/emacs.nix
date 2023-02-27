@@ -17,9 +17,9 @@ with super.pkgs;
     dontWrapGApps = true;
   }))).emacsWithPackages (epkgs: [
     epkgs.vterm
-    (callPackage ../packages/rime.nix {
-      inherit (pkgs) fetchFromGitHub librime;
-      inherit (epkgs) trivialBuild dash;
-    })
+#    (callPackage ../packages/rime.nix {
+#      inherit (pkgs) fetchFromGitHub librime;
+#      inherit (epkgs) trivialBuild dash;
+#    })
   ]));
 }
