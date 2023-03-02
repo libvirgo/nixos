@@ -94,6 +94,7 @@ in
         glog = "git log --oneline --decorate --graph";
         gst = "git status";
         oss = "nixos-rebuild -I nixos-config=/etc/nixos/flake.nix switch --flake .#ragdoll --impure --use-remote-sudo && source ~/.zshrc";
+        ost = "nixos-rebuild -I nixos-config=/etc/nixos/flake.nix test --flake .#ragdoll --impure --use-remote-sudo";
       };
       plugins = [
         {
