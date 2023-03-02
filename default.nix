@@ -5,23 +5,25 @@ with lib.my;
 {
   imports =
     # I use home-manager to deploy files to $HOME; little else
-    [ inputs.home-manager.nixosModules.home-manager {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      environment = {
-        sessionVariables = {
-          XDG_CACHE_HOME  = "$HOME/.cache";
-          XDG_CONFIG_HOME = "$HOME/.config";
-          XDG_DATA_HOME   = "$HOME/.local/share";
-          XDG_BIN_HOME    = "$HOME/.local/bin";
-        };
-       };
-      home-manager.extraSpecialArgs = { inherit inputs; };
-      home-manager.users.sakura = import ./users/sakura/home.nix;
-    }]
+    [
+      inputs.home-manager.nixosModules.home-manager {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        environment = {
+          sessionVariables = {
+            XDG_CACHE_HOME  = "$HOME/.cache";
+            XDG_CONFIG_HOME = "$HOME/.config";
+            XDG_DATA_HOME   = "$HOME/.local/share";
+            XDG_BIN_HOME    = "$HOME/.local/bin";
+          };
+         };
+        home-manager.extraSpecialArgs = { inherit inputs; };
+      }
+      (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" "sakura"])
+    ]
     # All my personal modules
     ++ (mapModulesRec' (toString ./modules) import);
-
+  hm = import ./users/sakura/home.nix;
   # Use the systemd-boot EFI boot loader.
   boot = {
     supportedFilesystems = [ "ntfs" ];
