@@ -1,8 +1,9 @@
 { lib, ... }:
+
 with builtins;
 with lib;
 rec {
-  # [ { name = "x"; value = "a"; } { name = "y"; value = "b"; } ]
+  # attrsToList
   attrsToList = attrs:
     mapAttrsToList (name: value: { inherit name value; }) attrs;
 
@@ -10,11 +11,9 @@ rec {
   #   (name -> value -> bool)
   #   (name -> value -> { name = any; value = any; })
   #   attrs
-  # mapFilterAttrs (n: v: n == "foo_x")
-  #   (n: v: lib.nameValuePair ("foo_" + n) ("bar_" + v)) { x = "a"; y = "b";}
-  # { foo_x = "bar_a"; }
   mapFilterAttrs = pred: f: attrs: filterAttrs pred (mapAttrs' f attrs);
 
+  # Generate an attribute set by mapping a function over a list of values.
   genAttrs' = values: f: listToAttrs (map f values);
 
   # anyAttrs :: (name -> value -> bool) attrs

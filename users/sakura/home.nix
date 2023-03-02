@@ -93,7 +93,7 @@ in
         pack = "tar -zcvf archive.tar.gz";
         glog = "git log --oneline --decorate --graph";
         gst = "git status";
-        oss = "nixos-rebuild switch --flake .#ragdoll --impure --use-remote-sudo && source ~/.zshrc";
+        oss = "nixos-rebuild -I nixos-config=/etc/nixos/flake.nix switch --flake .#ragdoll --impure --use-remote-sudo && source ~/.zshrc";
       };
       plugins = [
         {
