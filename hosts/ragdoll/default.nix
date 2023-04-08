@@ -18,18 +18,20 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.firewall.allowedTCPPorts = [ 80 443 24800 3306 3069 2379 1099 ];
+  # networking.firewall.enable = false;
+  networking.networkmanager.dns = "systemd-resolved";
+  services.resolved.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
   # Configure network proxy if necessary
   networking.proxy.default = "http://127.0.0.1:7890";
-  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24";
-  networking.extraHosts = ''
-    127.0.0.1 etcd
-    127.0.0.1 redis
-    127.0.0.1 jaeger
-  '';
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain,10.96.0.0/12,192.168.59.0/24,192.168.49.0/24,192.168.39.0/24,etcd,redis,jaeger";
+  networking.hosts = {
+    "127.0.0.1" = [ "etcd" "redis" "jaeger" "mysql" "postgre" ];
+  };
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.inputMethod = {
     enabled = "ibus";
@@ -60,6 +62,8 @@
     ];
     initialPassword = "nixos";
   };
+  environment.systemPackages = with pkgs; [
+  ];
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
