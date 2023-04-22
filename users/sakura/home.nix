@@ -33,6 +33,7 @@ in
       minikube
       kubectl
       gradle
+      firefox
   ];
   dconf.settings = {
     "org/gnome/shell/extensions/trayIconsReloaded" = {
